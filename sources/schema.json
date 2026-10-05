@@ -1,0 +1,29 @@
+{
+  "version": 1,
+  "fields": {
+    "id": "stable unique source id",
+    "title": "source title",
+    "url": "canonical Torn URL",
+    "sourceType": "wiki | forum",
+    "topics": [
+      "primary subjects"
+    ],
+    "subtopics": [
+      "specific subjects"
+    ],
+    "actions": [
+      "question actions answered"
+    ],
+    "aliases": [
+      "alternate terms and abbreviations"
+    ],
+    "relatedTerms": [
+      "supporting search terms"
+    ],
+    "exclusions": [
+      "terms or subjects that reduce rank"
+    ],
+    "authority": "official | community",
+    "verified": "YYYY-MM-DD or null"
+  }
+}
