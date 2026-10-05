@@ -1,7 +1,7 @@
 // ==UserScript==
 // @name         Torn Help Desk
 // @namespace    https://github.com/St4ticDesign/HelpDesk
-// @version      0.1.8
+// @version      0.1.9
 // @description  Anchored Torn Help Desk UI for Tampermonkey and Torn PDA.
 // @author       St4TIC
 // @match        https://www.torn.com/profiles.php*
@@ -123,9 +123,9 @@
                 top:12px;
                 border-radius:5px;
                 overflow:hidden;
-                background:#202020;
-                border:1px solid #343434;
-                color:#ddd;
+                background:#333;
+                border:1px solid #444;
+                color:#eee;
                 font-family:Arial,sans-serif;
             }
             #${ROOT_ID} *{box-sizing:border-box}
@@ -136,8 +136,8 @@
                 align-items:center;
                 justify-content:space-between;
                 gap:10px;
-                background:linear-gradient(#2b2b2b,#242424);
-                border-bottom:1px solid #111;
+                background:linear-gradient(#444,#333);
+                border-bottom:1px solid #222;
                 font-size:13px;
                 font-weight:700;
                 letter-spacing:.4px;
@@ -175,7 +175,7 @@
             #${ROOT_ID} label{
                 display:block;
                 margin:0 0 7px;
-                color:#bbb;
+                color:#eee;
                 font-size:12px;
                 font-weight:700;
             }
@@ -190,10 +190,10 @@
                 min-width:0;
                 height:38px;
                 padding:0 11px;
-                border:1px solid #444;
+                border:1px solid #555;
                 border-radius:4px;
                 outline:none;
-                background:#151515;
+                background:#222;
                 color:#eee;
                 font-size:14px;
             }
@@ -208,27 +208,27 @@
                 padding:0 14px;
                 border:1px solid #555;
                 border-radius:4px;
-                background:#333;
+                background:linear-gradient(#444,#333);
                 color:#eee;
                 font-size:12px;
                 font-weight:700;
                 cursor:pointer;
                 touch-action:manipulation;
             }
-            #${ROOT_ID} button:hover{background:#3b3b3b}
+            #${ROOT_ID} button:hover{background:#444}
             #${ROOT_ID} button:active{transform:translateY(1px)}
             #${ROOT_ID} .hd-results{
                 min-height:38px;
                 margin-top:10px;
                 padding:10px;
-                border:1px solid #333;
+                border:1px solid #444;
                 border-radius:4px;
-                background:#181818;
+                background:#2b2b2b;
                 font-size:12px;
                 line-height:1.45;
                 overflow-wrap:anywhere;
             }
-            #${ROOT_ID} .hd-muted{color:#888}
+            #${ROOT_ID} .hd-muted{color:#aaa}
             @media (max-width:600px){
                 #${ROOT_ID}{border-radius:4px}
                 #${ROOT_ID} .hd-head{padding:9px 10px}
