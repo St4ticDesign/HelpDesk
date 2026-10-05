@@ -1,7 +1,7 @@
 // ==UserScript==
 // @name         Torn Help Desk
 // @namespace    https://github.com/St4ticDesign/HelpDesk
-// @version      0.1.3
+// @version      0.1.4
 // @description  Anchored Torn Help Desk UI for Tampermonkey and Torn PDA.
 // @author       St4TIC
 // @match        https://www.torn.com/profiles.php*
@@ -91,7 +91,10 @@
         root.innerHTML = `
             <div class="hd-head">
                 <span>HELP DESK</span>
-                <span class="hd-source" id="hd-source">Connecting…</span>
+                <div class="hd-head-right">
+                    <span class="hd-source" id="hd-source">Connecting…</span>
+                    <button class="hd-collapse" id="hd-collapse" type="button" aria-label="Collapse Help Desk" aria-expanded="true">▲</button>
+                </div>
             </div>
             <div class="hd-body">
                 <form id="hd-form" autocomplete="off">
@@ -115,7 +118,7 @@
             #${ROOT_ID}{
                 width:100%;
                 box-sizing:border-box;
-                margin:0 0 10px;
+                margin:10px 0 10px;
                 border-radius:5px;
                 overflow:hidden;
                 background:#202020;
@@ -137,6 +140,11 @@
                 font-weight:700;
                 letter-spacing:.4px;
             }
+            #${ROOT_ID} .hd-head-right{
+                display:flex;
+                align-items:center;
+                gap:9px;
+            }
             #${ROOT_ID} .hd-source{
                 color:#999;
                 font-size:11px;
@@ -146,6 +154,21 @@
             }
             #${ROOT_ID} .hd-source.ready{color:#7fbf6a}
             #${ROOT_ID} .hd-source.error{color:#d87868}
+            #${ROOT_ID} .hd-collapse{
+                min-width:28px;
+                width:28px;
+                height:24px;
+                min-height:24px;
+                padding:0;
+                border:0;
+                background:transparent;
+                color:#aaa;
+                font-size:11px;
+                line-height:24px;
+                cursor:pointer;
+            }
+            #${ROOT_ID} .hd-collapse:hover{background:transparent;color:#eee}
+            #${ROOT_ID}.collapsed .hd-body{display:none}
             #${ROOT_ID} .hd-body{padding:12px}
             #${ROOT_ID} label{
                 display:block;
@@ -220,6 +243,14 @@
         const form = root.querySelector('#hd-form');
         const input = root.querySelector('#hd-question');
         const results = root.querySelector('#hd-results');
+        const collapse = root.querySelector('#hd-collapse');
+
+        collapse.addEventListener('click', () => {
+            const collapsed = root.classList.toggle('collapsed');
+            collapse.textContent = collapsed ? '▼' : '▲';
+            collapse.setAttribute('aria-expanded', String(!collapsed));
+            collapse.setAttribute('aria-label', collapsed ? 'Expand Help Desk' : 'Collapse Help Desk');
+        });
 
         form.addEventListener('submit', e => {
             e.preventDefault();
