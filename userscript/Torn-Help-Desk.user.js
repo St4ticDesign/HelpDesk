@@ -1,11 +1,13 @@
 // ==UserScript==
 // @name         Torn Help Desk
 // @namespace    https://github.com/St4ticDesign/HelpDesk
-// @version      0.1.0
+// @version      0.1.1
 // @description  Anchored Torn Help Desk UI for Tampermonkey and Torn PDA.
 // @author       St4TIC
 // @match        https://www.torn.com/profiles.php*
+// @match        https://www.torn.com/profiles.php?*
 // @match        https://www.torn.com/profiles.php#*
+// @match        https://www.torn.com/*
 // @connect      raw.githubusercontent.com
 // @grant        GM_xmlhttpRequest
 // @run-at       document-idle
@@ -78,7 +80,9 @@
     function makeUI() {
         if (document.getElementById(ROOT_ID)) return;
 
-        const notes = document.querySelector('#profile-notes');
+        const notes =
+            document.querySelector('#profile-notes') ||
+            document.querySelector('[id="profile-notes"]');
         if (!notes || !notes.parentNode) return;
 
         const root = document.createElement('section');
@@ -248,11 +252,19 @@
 
         const observer = new MutationObserver(() => {
             makeUI();
-            if (document.getElementById(ROOT_ID)) observer.disconnect();
         });
 
         observer.observe(document.body, { childList:true, subtree:true });
-        setTimeout(() => observer.disconnect(), 20000);
+
+        // Torn is an SPA in places, and PDA can mount the profile later.
+        // Keep a lightweight route-aware retry alive instead of giving up after 20s.
+        let lastHref = location.href;
+        setInterval(() => {
+            if (location.href !== lastHref) {
+                lastHref = location.href;
+            }
+            if (/\/profiles\.php/i.test(location.pathname)) makeUI();
+        }, 1000);
     }
 
     if (document.readyState === 'loading') {
