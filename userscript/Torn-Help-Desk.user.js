@@ -1,7 +1,7 @@
 // ==UserScript==
 // @name         Torn Help Desk
 // @namespace    https://github.com/St4ticDesign/HelpDesk
-// @version      0.1.5
+// @version      0.1.6
 // @description  Anchored Torn Help Desk UI for Tampermonkey and Torn PDA.
 // @author       St4TIC
 // @match        https://www.torn.com/profiles.php*
@@ -118,7 +118,7 @@
             #${ROOT_ID}{
                 width:100%;
                 box-sizing:border-box;
-                margin:16px 0 10px;
+                margin:0 0 10px;
                 border-radius:5px;
                 overflow:hidden;
                 background:#202020;
@@ -239,6 +239,15 @@
 
         document.head.appendChild(style);
         notes.parentNode.insertBefore(root, notes);
+
+        // Torn's profile wrapper clips/collapses normal top margins here.
+        // Create the requested physical separation from the panel above.
+        const spacer = document.createElement('div');
+        spacer.id = ROOT_ID + '-spacer';
+        spacer.style.height = '12px';
+        spacer.style.width = '100%';
+        spacer.style.clear = 'both';
+        root.parentNode.insertBefore(spacer, root);
 
         const form = root.querySelector('#hd-form');
         const input = root.querySelector('#hd-question');
