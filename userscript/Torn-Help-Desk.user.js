@@ -1,7 +1,7 @@
 // ==UserScript==
 // @name         Torn Help Desk
 // @namespace    https://github.com/St4ticDesign/HelpDesk
-// @version      0.1.6
+// @version      0.1.7
 // @description  Anchored Torn Help Desk UI for Tampermonkey and Torn PDA.
 // @author       St4TIC
 // @match        https://www.torn.com/profiles.php*
@@ -244,8 +244,10 @@
         // Create the requested physical separation from the panel above.
         const spacer = document.createElement('div');
         spacer.id = ROOT_ID + '-spacer';
-        spacer.style.height = '12px';
+        spacer.style.height = '24px';
         spacer.style.width = '100%';
+        spacer.style.display = 'block';
+        spacer.style.flex = '0 0 24px';
         spacer.style.clear = 'both';
         root.parentNode.insertBefore(spacer, root);
 
