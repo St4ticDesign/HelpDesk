@@ -1,7 +1,7 @@
 // ==UserScript==
 // @name         Torn Help Desk
 // @namespace    https://github.com/St4ticDesign/HelpDesk
-// @version      0.1.10
+// @version      0.1.11
 // @description  Anchored Torn Help Desk UI for Tampermonkey and Torn PDA.
 // @author       St4TIC
 // @match        https://www.torn.com/profiles.php*
@@ -145,17 +145,7 @@
                 display:flex;
                 align-items:center;
                 gap:9px;
-            }
-            #${ROOT_ID} .hd-source{
-                color:#999;
-                font-size:11px;
-                font-weight:400;
-                letter-spacing:0;
-                white-space:nowrap;
-            }
-            #${ROOT_ID} .hd-source.ready{color:#7fbf6a}
-            #${ROOT_ID} .hd-source.error{color:#d87868}
-            #${ROOT_ID} .hd-collapse{
+            }            #${ROOT_ID} .hd-collapse{
                 min-width:28px;
                 width:28px;
                 height:24px;
@@ -268,11 +258,8 @@
         loadSources()
             .then(sources => {
                 window.__TORN_HELP_DESK_SOURCES__ = sources;
-
             })
-            .catch(() => {
-
-            });
+            .catch(() => {});
     }
 
     function boot() {
