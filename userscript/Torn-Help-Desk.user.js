@@ -1,7 +1,7 @@
 // ==UserScript==
 // @name         Torn Help Desk
 // @namespace    https://github.com/St4ticDesign/HelpDesk
-// @version      0.1.9
+// @version      0.1.10
 // @description  Anchored Torn Help Desk UI for Tampermonkey and Torn PDA.
 // @author       St4TIC
 // @match        https://www.torn.com/profiles.php*
@@ -92,7 +92,6 @@
             <div class="hd-head">
                 <span>HELP DESK</span>
                 <div class="hd-head-right">
-                    <span class="hd-source" id="hd-source">Connecting…</span>
                     <button class="hd-collapse" id="hd-collapse" type="button" aria-label="Collapse Help Desk" aria-expanded="true">▲</button>
                 </div>
             </div>
@@ -269,14 +268,10 @@
         loadSources()
             .then(sources => {
                 window.__TORN_HELP_DESK_SOURCES__ = sources;
-                const badge = root.querySelector('#hd-source');
-                badge.textContent = sources.length + ' sources connected';
-                badge.classList.add('ready');
+
             })
             .catch(() => {
-                const badge = root.querySelector('#hd-source');
-                badge.textContent = 'Source connection failed';
-                badge.classList.add('error');
+
             });
     }
 
