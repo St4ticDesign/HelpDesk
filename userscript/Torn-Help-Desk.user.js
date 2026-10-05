@@ -1,7 +1,7 @@
 // ==UserScript==
 // @name         Torn Help Desk
 // @namespace    https://github.com/St4ticDesign/HelpDesk
-// @version      0.1.11
+// @version      0.1.12
 // @description  Anchored Torn Help Desk UI for Tampermonkey and Torn PDA.
 // @author       St4TIC
 // @match        https://www.torn.com/profiles.php*
@@ -78,7 +78,11 @@
     }
 
     function makeUI() {
-        if (document.getElementById(ROOT_ID)) return;
+        const existing = document.getElementById(ROOT_ID);
+        if (existing) {
+            existing.querySelectorAll('#hd-source, .hd-source').forEach(el => el.remove());
+            return;
+        }
 
         const profile = document.querySelector('.user-profile');
         if (!profile) return;
